@@ -24,7 +24,7 @@ RUN chown -R docker $APP_HOME && chgrp -R sse $APP_HOME
 USER docker
 
 # define startup script
-CMD scripts/entry.sh
+CMD scripts/entry.ksh
 
 # move in the profile
 COPY data/container_bash_profile /home/docker/.profile
