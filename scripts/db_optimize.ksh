@@ -21,7 +21,7 @@ if [ -z "$DBPASSWD" ]; then
 #   error_and_exit "no DBPASSWD; please define your database password"
    PASSWD_OPT=""
 else
-   PASSWD_OPT="-p=$DBPASSWD"
+   PASSWD_OPT="--password=$DBPASSWD"
 fi
 if [ -z "$OPTIMIZE_TIME" ]; then
    error_and_exit "no OPTIMIZE_TIME; please define your optimize time"
