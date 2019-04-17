@@ -33,7 +33,7 @@ export ACTION_TIME=$OPTIMIZE_TIME
 export ACTION_TIMEZONE="America/New_York"
 
 # helpful message...
-echo "$MYNAME: starting up..."
+banner_message "$MYNAME: starting up..."
 
 # forever...
 while true; do
@@ -42,38 +42,44 @@ while true; do
    banner_message "$MYNAME: sleeping until $ACTION_TIME ($ACTION_TIMEZONE)..."
    sleep_until $ACTION_TIME $ACTION_TIMEZONE
 
-   # starting message
-   banner_message "$MYNAME: beginning DB optimize sequence"
+   # status message
+   banner_message "$MYNAME: starting DB check sequence"
 
    # do the database check
    mysqlcheck -h $DBHOST -u $DBUSER $PASSWD_OPT --check --all-databases
    res=$?
    if [ $res -ne 0 ]; then
-      echo "ERROR: returned $res during database check; abandoning further processing"
+      banner_message "ERROR: returned $res during database check; abandoning further processing"
       sleep 60
       continue
    fi
+
+   # status message
+   banner_message "$MYNAME: starting DB optimize sequence"
 
    # do the database optimize
    mysqlcheck -h $DBHOST -u $DBUSER $PASSWD_OPT --optimize --all-databases
    res=$?
    if [ $res -ne 0 ]; then
-      echo "ERROR: returned $res during database optimize; abandoning further processing"
+      banner_message "ERROR: returned $res during database optimize; abandoning further processing"
       sleep 60
       continue
    fi
+
+   # status message
+   banner_message "$MYNAME: starting DB analyze sequence"
 
    # do the database analyze
    mysqlcheck -h $DBHOST -u $DBUSER $PASSWD_OPT --analyze --all-databases
    res=$?
    if [ $res -ne 0 ]; then
-      echo "ERROR: returned $res during database analyze; abandoning further processing"
+      banner_message "ERROR: returned $res during database analyze; abandoning further processing"
       sleep 60
       continue
    fi
 
    # ending message
-   banner_message "$MYNAME: DB optimize sequence completes successfully"
+   banner_message "$MYNAME: sequence completes successfully"
 
    # sleep for another minute
    sleep 60
