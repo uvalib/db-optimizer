@@ -1,7 +1,7 @@
-FROM alpine:3.9
+FROM alpine:3.10
 
 # Add necessary packages
-RUN apk --update add bash tzdata mariadb-client ca-certificates
+RUN apk --update add bash tzdata mariadb-client postgresql-client ca-certificates
 
 # Create the run user and group
 RUN addgroup --gid 18570 sse && adduser --uid 1984 docker -G sse -D
