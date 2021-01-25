@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:3.13
 
 # Add necessary packages
 RUN apk --update add bash tzdata mariadb-client postgresql-client ca-certificates
