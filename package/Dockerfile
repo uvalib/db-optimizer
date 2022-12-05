@@ -1,4 +1,7 @@
-FROM public.ecr.aws/docker/library/alpine:3.16
+#
+#
+#
+FROM public.ecr.aws/docker/library/alpine:3.17
 
 # Add necessary packages
 RUN apk --update add bash tzdata mariadb-client postgresql-client ca-certificates
@@ -28,3 +31,7 @@ CMD scripts/entry.ksh
 
 # move in the profile
 COPY data/container_bash_profile /home/docker/.profile
+
+#
+# end of file
+#
