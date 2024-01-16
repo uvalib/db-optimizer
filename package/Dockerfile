@@ -1,7 +1,7 @@
 #
 #
 #
-FROM public.ecr.aws/docker/library/alpine:3.18
+FROM public.ecr.aws/docker/library/alpine:3.19
 
 # Add necessary packages
 RUN apk --update add bash tzdata mariadb-client postgresql-client ca-certificates
